@@ -1,8 +1,8 @@
 from typing import List
 
-# Given an integer x, return true if x is a palindrome, and false otherwise.
-test_input = "IV"
-expected_out = 1994
+# Given string of roman letters give its numerical value
+test_input = "LVIII"
+expected_out = 58
 
 
 class Solution:
@@ -21,47 +21,25 @@ class Solution:
         }
 
         count = 0
-        previous = ""
-        num_to_rest = 0
-        prev_conditioned = None
+        previous = 9999
         for letter in s:
-            
             number = roman_letters.get(letter)
             
-            
-            """if previous == "X" and (letter == "L" or letter == "C"):
-                rest = (number-10)
-
-            if previous == "C" and (letter == "D" or letter == "M"):
-                rest = (number-100)"""
-
-
-            if letter in ["I", "X", "C"] and prev_conditioned == False and previous not in ["I", "X", "C"]:
-                prev_conditioned = True
-                num_to_rest = roman_letters.get(letter)
-            
-            else:
-
-                prev_conditioned = False
-                previous = letter
-                count += (number-num_to_rest)
-
+            if previous < number:
+                rest = number - previous *2 # Its times 2 because in first pass we already added to count once, so we need to rest two times.
+                count += rest
                 
+            else:
+                count+= number
 
-            
-
-            
-            
-            
-
-
-        print("final:" + str(count))
-
+            print("prev: " + str(previous) + ", number: " + str(number) + ", count: " + str(count))
+            previous = number
         
 
+        return count
 
 
-            
+         
             
 
 
