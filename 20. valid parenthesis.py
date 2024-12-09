@@ -1,53 +1,45 @@
-test_input = "([])"
-expected_out = False
+test_input = "([[])"
+expected_out = True
 
 
 class Solution:
     def isValid(self, s: str) -> bool:
         stack = []
 
-        if len(s) < 2:
+        if len(s) < 2 or s[0] in "]})":
             return False
-        for char in s:
-            
-            
-            if stack:
-                if char in "}])":
-                    if char == ")" and stack[-1] == "(":
-                        stack.pop()
-                        continue
-                    
-                    if char == "]" and stack[-1] == "[":
-                        stack.pop()
-                        continue
+        
+        brackets = {
+            "[": "]",
+            "{": "}",
+            "(": ")"
+        }
 
-                    if char == "}" and stack[-1] == "{":
-                        stack.pop()
-                        continue
-                    
-                    else:
-                        print(char)
-                        return False
-                
-                else: return False
-            
-            
+        
+        for char in s:    
+
             if char in "[{(": #Opening
                 stack.append(char)
                 continue
 
-                
-        return True
             
-            
+            if char in "]})":
+                try:
+                    opening = stack[-1]
+                except IndexError:
+                    return False
 
+                if char == brackets.get(opening):
+                    stack.pop()
 
-            
-                    
-                
-            
-
-      
+                else:
+                    return False
+        
+        if len(stack) > 0:
+            return False
+        
+        else:
+            return True
 
 
 
