@@ -1,6 +1,6 @@
 # find index of first occurence of needle in haystack
-needle = "sad"
-haystack = "buts"
+needle = "ll"
+haystack = "hello"
 
 
 
@@ -14,13 +14,12 @@ class Solution:
                 return i
 
             else:
-                i+= len(needle)
-                count += i
+                i+= 1
+                count += 1
         
         return -1
 
                 
-
 
 
 
